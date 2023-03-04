@@ -8,6 +8,7 @@ const loginProcess = () => {
     userData.value.username === "admin" &&
     userData.value.password === "admin"
   ) {
+    localStorage.clear();
     localStorage.setItem("status", "logged");
     router.push("/home");
   } else alert("Username: admin, Password: admin");

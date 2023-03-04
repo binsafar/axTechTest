@@ -62,5 +62,10 @@ const props = defineProps({
 });
 const dialog = ref(false);
 const contacts = ref(users);
-const formData = ref({});
+const formData = ref({
+  fio: "",
+  phone: "",
+  email: "",
+  tags: [],
+});
 </script>

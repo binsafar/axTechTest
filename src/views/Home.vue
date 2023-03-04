@@ -47,18 +47,20 @@
 </template>
 
 <script lang="ts" setup>
+import { onBeforeMount, onBeforeUnmount, ref } from "vue";
 import FormCom from "@/components/FormCom.vue";
-import { onBeforeMount } from "vue";
 import router from "@/router";
-import { ref } from "vue";
 import users, { items } from "../service/db/users";
 
 const contacts = ref(users);
-
 const deleteContact = (id: number) => {};
 
 onBeforeMount(() => {
   let status = localStorage.getItem("status");
   if (status !== "logged") router.push("/");
+});
+
+onBeforeUnmount(() => {
+  localStorage.clear();
 });
 </script>
