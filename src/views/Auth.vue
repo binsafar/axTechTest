@@ -1,34 +1,38 @@
-<script lang="ts">
+<script lang="ts" setup>
 import router from "@/router";
 import { ref } from "vue";
 
-export {};
-
-let username = ref({ value: "" });
-let password = ref({ value: "" });
-
+let userData = ref({ username: "", password: "" });
 const loginProcess = () => {
-  if (username.value.value === "admin" && password.value.value === "admin") {
+  if (
+    userData.value.username === "admin" &&
+    userData.value.password === "admin"
+  ) {
+    localStorage.setItem("status", "logged");
     router.push("/home");
-    return false;
-  } else return true;
+  } else alert("Username: admin, Password: admin");
 };
 </script>
 
 <template>
   <v-card class="mx-auto root-wrapper" width="400">
     <h1 class="text-center">Authentication</h1>
-    <form class="mx-auto" @submit.prevent="">
+    <form class="mx-auto" @submit.prevent="loginProcess">
       <v-form fast-fail @submit.prevent>
-        <v-text-field v-model="username" label="Username"></v-text-field>
+        <v-text-field
+          v-model="userData.username"
+          label="Username"
+        ></v-text-field>
 
         <v-text-field
-          v-model="password"
+          v-model="userData.password"
           label="Password"
           type="password"
         ></v-text-field>
 
-        <v-btn type="submit" block class="mt-2">Submit</v-btn>
+        <v-btn @click="loginProcess" type="submit" block class="mt-2"
+          >Submit</v-btn
+        >
       </v-form>
     </form>
   </v-card>
