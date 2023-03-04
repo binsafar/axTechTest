@@ -8,7 +8,11 @@
           <th class="text-left">Phone</th>
           <th class="text-left">Email</th>
           <th class="text-left">Tags</th>
-          <form-com :add="true" />
+          <form-com
+            :add="0"
+            :add_function="addContact"
+            :edit_function="editContact"
+          />
         </tr>
       </thead>
 
@@ -30,7 +34,12 @@
           </td>
           <td>
             <div class="d-flex align-center">
-              <form-com :user_data="contact" :add="false" />
+              <form-com
+                :user_data="contact"
+                :add_function="addContact"
+                :edit_function="editContact"
+                :add="1"
+              />
               <v-btn
                 variant="text"
                 color="error"
@@ -53,14 +62,30 @@ import router from "@/router";
 import users, { items } from "../service/db/users";
 
 const contacts = ref(users);
-const deleteContact = (id: number) => {};
+
+const deleteContact = (id: number) => {
+  let index = contacts.value.findIndex((item) => item.id === id);
+  contacts.value.splice(index, 1);
+};
+
+const addContact = (user: any) => {
+  if (contacts.value.length != 0) {
+    contacts.value.push({
+      ...user,
+      id: contacts.value[contacts.value.length - 1].id + 1,
+    });
+  } else {
+    contacts.value.push({ ...user, id: 1 });
+  }
+};
+
+const editContact = (id: number, user: any) => {
+  let index = contacts.value.findIndex((item) => item.id === id);
+  contacts.value[index] = { ...user, id };
+};
 
 onBeforeMount(() => {
   let status = localStorage.getItem("status");
   if (status !== "logged") router.push("/");
-});
-
-onBeforeUnmount(() => {
-  localStorage.clear();
 });
 </script>

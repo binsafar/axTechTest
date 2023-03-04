@@ -20,7 +20,7 @@ const users = [
     fio: "Doe John",
     phone: "90 123 11 11",
     email: "doe@mail.ru",
-    tags: ["office"],
+    tags: ["office", "home"],
   },
   {
     id: 4,

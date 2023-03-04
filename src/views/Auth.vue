@@ -1,20 +1,3 @@
-<script lang="ts" setup>
-import router from "@/router";
-import { ref } from "vue";
-
-let userData = ref({ username: "", password: "" });
-const loginProcess = () => {
-  if (
-    userData.value.username === "admin" &&
-    userData.value.password === "admin"
-  ) {
-    localStorage.clear();
-    localStorage.setItem("status", "logged");
-    router.push("/home");
-  } else alert("Username: admin, Password: admin");
-};
-</script>
-
 <template>
   <v-card class="mx-auto root-wrapper" width="400">
     <h1 class="text-center">Authentication</h1>
@@ -38,6 +21,26 @@ const loginProcess = () => {
     </form>
   </v-card>
 </template>
+
+<script lang="ts" setup>
+import router from "@/router";
+import { ref, onMounted } from "vue";
+
+let userData = ref({ username: "", password: "" });
+onMounted(() => {
+  localStorage.clear();
+});
+const loginProcess = () => {
+  if (
+    userData.value.username === "admin" &&
+    userData.value.password === "admin"
+  ) {
+    localStorage.clear();
+    localStorage.setItem("status", "logged");
+    router.push("/home");
+  } else alert("Username: admin, Password: admin");
+};
+</script>
 
 <style scoped>
 .root-wrapper {
