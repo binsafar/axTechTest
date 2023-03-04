@@ -8,7 +8,7 @@
           <th class="text-left">Phone</th>
           <th class="text-left">Email</th>
           <th class="text-left">Tags</th>
-          <th class="text-left"><v-btn variant="text">+ add</v-btn></th>
+          <form-com :add="true" />
         </tr>
       </thead>
 
@@ -29,12 +29,13 @@
             ></v-select>
           </td>
           <td>
-            <div>
-              <v-btn variant="text">
-                <v-icon> mdi-pencil </v-icon>
-              </v-btn>
-
-              <v-btn variant="text" @click="deleteContact(contact.id)">
+            <div class="d-flex align-center">
+              <form-com />
+              <v-btn
+                variant="text"
+                color="error"
+                @click="deleteContact(contact.id)"
+              >
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
             </div>
@@ -46,33 +47,11 @@
 </template>
 
 <script lang="ts" setup>
+import FormCom from "@/components/FormCom.vue";
 import { ref } from "vue";
+import users, { items } from "../service/db/users";
 
-let items = ["home", "office", "family", "friends"];
-const contacts = ref([
-  {
-    id: 1,
-    fio: "John Doe",
-    phone: "90 123 23 23",
-    email: "doe@gmail.com",
-    tags: ["office"],
-  },
-  {
-    id: 2,
-    fio: "John Deo",
-    phone: "90 123 22 22",
-    email: "doe@outlook.com",
-    tags: ["office"],
-  },
-  {
-    id: 3,
-    fio: "Doe John",
-    phone: "90 123 11 11",
-    email: "doe@mail.ru",
-    tags: ["office"],
-  },
-]);
-const deleteContact = (id: number) => {
-  contacts.value.slice(id, 1);
-};
+const contacts = ref(users);
+
+const deleteContact = (id: number) => {};
 </script>
