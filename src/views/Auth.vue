@@ -26,10 +26,12 @@
 import router from "@/router";
 import { ref, onMounted } from "vue";
 
-let userData = ref({ username: "", password: "" });
 onMounted(() => {
   localStorage.clear();
 });
+
+let userData = ref({ username: "", password: "" });
+
 const loginProcess = () => {
   if (
     userData.value.username === "admin" &&

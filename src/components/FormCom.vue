@@ -60,7 +60,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import users, { items } from "../service/db/users";
+import { items } from "../service/db/users";
 
 const parentProps = defineProps({
   user_data: Object,
@@ -69,8 +69,6 @@ const parentProps = defineProps({
   add_function: Function,
 });
 
-const dialog = ref(false);
-const contacts = ref(users);
 const formData = ref({
   id: 1,
   fio: "",

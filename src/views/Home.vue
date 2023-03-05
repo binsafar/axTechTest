@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onBeforeUnmount, ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import FormCom from "@/components/FormCom.vue";
 import router from "@/router";
 import users, { items } from "../service/db/users";
@@ -74,9 +74,7 @@ const addContact = (user: any) => {
       ...user,
       id: contacts.value[contacts.value.length - 1].id + 1,
     });
-  } else {
-    contacts.value.push({ ...user, id: 1 });
-  }
+  } else contacts.value.push({ ...user, id: 1 });
 };
 
 const editContact = (id: number, user: any) => {
